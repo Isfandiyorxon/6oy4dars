@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books and Comments</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 0.5rem 0;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .book-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .comments-list {
+            margin-top: 1rem;
+            padding-left: 20px;
+        }
+        .comment {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Books and Comments</h1>
+    </header>
+    <div class="container">
+        <h2>Available Books and Their Comments</h2>
+        <ul>
+            {% for book in books %}
+            <li>
+                <div class="book-title">{{ book.title }}</div>
+                <div class="comments-list">
+                    <strong>Comments:</strong>
+                    {% if book.comments.all %}
+                        <ul>
+                            {% for comment in book.comments.all %}
+                            <li class="comment">
+                                <strong>{{ comment.author }}:</strong>
+                                <p>{{ comment.text }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No comments yet.</p>
+                    {% endif %}
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
